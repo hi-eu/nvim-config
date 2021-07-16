@@ -15,6 +15,8 @@ set smartindent " set smart indentation
 set smartcase " set to be cas sensitive when there is capital letter, this need set incsearch to work
 set incsearch " set search to be case insensitive
 set hidden
+set lazyredraw
+set magic
 set updatetime=250
 set shortmess+=c " for CoC plugin
 set noshowmode " set that vim mode is hidden, to incorporate for lightline plugin
@@ -40,18 +42,24 @@ inoremap <C-k> <ESC>:m .-2<CR>==gi
 " " Visual mode
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 call plug#begin("~/.config/nvim/plugged") 
   Plug 'morhetz/gruvbox'
+  Plug 'preservim/nerdcommenter'
+  Plug 'preservim/nerdtree'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'PhilRunninger/nerdtree-visual-selection'
   Plug 'itchyny/lightline.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'w0rp/ale'
   Plug 'sheerun/vim-polyglot'
-  Plug 'preservim/nerdcommenter'
   Plug 'tpope/vim-surround'
-  Plug 'preservim/nerdtree'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'ryanoasis/vim-devicons'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
@@ -236,6 +244,7 @@ let s:git_orange = 'F54D27'
 let g:NERDTreeExtensionHighlightColor = {} 
 " " Sets the color of css files to blue
 let g:NERDTreeExtensionHighlightColor['css'] = s:blue 
+let g:NERDTreeExtensionHighlightColor['terraform'] = s:green 
 " " This line is needed to avoid error
 let g:NERDTreeExactMatchHighlightColor = {} 
 " " Sets the color for .gitignore files
