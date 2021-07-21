@@ -49,26 +49,31 @@ au FocusGained,BufEnter * checktime
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 call plug#begin("~/.config/nvim/plugged") 
-  Plug 'morhetz/gruvbox'
-  Plug 'preservim/nerdcommenter'
-  Plug 'preservim/nerdtree'
-  Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'PhilRunninger/nerdtree-visual-selection'
-  Plug 'itchyny/lightline.vim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'w0rp/ale'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'tpope/vim-surround'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'hashivim/vim-terraform'
-  Plug 'mhinz/vim-startify'
-  Plug 'godlygeek/tabular'
-  Plug 'kana/vim-smartinput'
+   Plug 'morhetz/gruvbox'
+   Plug 'preservim/nerdcommenter'
+   Plug 'preservim/nerdtree'
+   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+   Plug 'Xuyuanp/nerdtree-git-plugin'
+   Plug 'PhilRunninger/nerdtree-visual-selection'
+   Plug 'itchyny/lightline.vim'
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   Plug 'w0rp/ale'
+   Plug 'sheerun/vim-polyglot'
+   Plug 'tpope/vim-surround'
+   Plug 'ryanoasis/vim-devicons'
+   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+   Plug 'junegunn/fzf.vim'
+   Plug 'tpope/vim-fugitive'
+   Plug 'hashivim/vim-terraform'
+   Plug 'mhinz/vim-startify'
+   Plug 'godlygeek/tabular'
+   Plug 'tpope/vim-surround'
+   Plug 'APZelos/blamer.nvim'
 call plug#end()
+
+" git blamer
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
 
 " Set Terraform
 let g:terraform_align=1
