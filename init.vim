@@ -49,36 +49,50 @@ au FocusGained,BufEnter * checktime
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 call plug#begin("~/.config/nvim/plugged") 
-   Plug 'morhetz/gruvbox'
-   Plug 'preservim/nerdcommenter'
-   Plug 'preservim/nerdtree'
-   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-   Plug 'Xuyuanp/nerdtree-git-plugin'
-   Plug 'PhilRunninger/nerdtree-visual-selection'
-   Plug 'itchyny/lightline.vim'
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
    Plug 'w0rp/ale'
-   Plug 'sheerun/vim-polyglot'
-   Plug 'tpope/vim-surround'
-   Plug 'ryanoasis/vim-devicons'
+   Plug 'camspiers/animate.vim'
+   Plug 'APZelos/blamer.nvim'
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
    Plug 'junegunn/fzf.vim'
-   Plug 'tpope/vim-fugitive'
-   Plug 'hashivim/vim-terraform'
-   Plug 'mhinz/vim-startify'
+   Plug 'morhetz/gruvbox'
+   Plug 'camspiers/lens.vim'
+   Plug 'itchyny/lightline.vim'
+   Plug 'preservim/nerdcommenter'
+   Plug 'preservim/nerdtree'
+   Plug 'Xuyuanp/nerdtree-git-plugin'
+   Plug 'PhilRunninger/nerdtree-visual-selection'
    Plug 'godlygeek/tabular'
+   Plug 'ryanoasis/vim-devicons'
+   Plug 'tpope/vim-fugitive'
+   Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+   Plug 'sheerun/vim-polyglot'
+   Plug 'mhinz/vim-startify'
    Plug 'tpope/vim-surround'
-   Plug 'APZelos/blamer.nvim'
-call plug#end()
+   Plug 'hashivim/vim-terraform'
+   Plug 'elzr/vim-json'
+cal plug#end()
 
-" git blamer
+" Git lens
+let g:lens#disabled = 0
+let g:lens#height_resize_max = 20
+let g:lens#height_resize_min = 5
+let g:lens#width_resize_max = 80
+let g:lens#width_resize_min = 20
+let g:lens#animate = 1
+let g:lens#disabled_filetypes = ['nerdtree', 'fzf']
+
+
+" Git blamer
 let g:blamer_enabled = 1
-let g:blamer_delay = 500
+let g:blamer_delay = 1000
 
 " Set Terraform
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+let g:terraform_fold_sections=1
 let g:hcl_align=1
+let g:hcl_fold_sections=1
 
 " Set ColorScheme
 if (has("termguicolors"))
@@ -91,10 +105,14 @@ colorscheme gruvbox
 let g:lightline = {
   \     'colorscheme': 'powerlineish',
   \     'active': {
-  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
+  \         'left': [['mode', 'paste' ], ['gitbranch', 'readonly', 'filename', 'modified']],
+  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding', 'filetype']]
+  \     },
+  \     'component_function': {
+  \         'gitbranch': 'FugitiveHead'
   \     }
   \ }
+
 
 " ALE (Asynchronous Lint Engine)
 let g:ale_fixers = {
